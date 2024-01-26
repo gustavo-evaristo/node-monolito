@@ -1,7 +1,7 @@
 import Address from "../../../@shared/domain/value-object/address";
 import Id from "../../../@shared/domain/value-object/id.value-object";
-import InvoiceItems from "../../domain/entity/invoice-item.entity";
-import Invoice from "../../domain/entity/invoice.entity";
+import Invoice from "../../domain/invoice.entity";
+import Product from "../../domain/product.entity";
 import FindInvoiceUseCase from "./find-invoice.usecase";
 
 const invoice = new Invoice({
@@ -16,12 +16,12 @@ const invoice = new Invoice({
     "SC",
     "88888-888"
   ),
-  items: [new InvoiceItems({ name: "Item 1", price: 100 })],
+  items: [new Product({ name: "Item 1", price: 100 })],
 });
 
 const MockRepository = () => {
   return {
-    add: jest.fn(),
+    create: jest.fn(),
     find: jest.fn().mockReturnValue(Promise.resolve(invoice)),
   };
 };

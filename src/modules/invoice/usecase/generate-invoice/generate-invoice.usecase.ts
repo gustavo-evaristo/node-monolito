@@ -1,7 +1,7 @@
 import Address from "../../../@shared/domain/value-object/address";
 import Id from "../../../@shared/domain/value-object/id.value-object";
-import InvoiceItems from "../../domain/entity/invoice-item.entity";
-import Invoice from "../../domain/entity/invoice.entity";
+import Invoice from "../../domain/invoice.entity";
+import Product from "../../domain/product.entity";
 import InvoiceGateway from "../../gateway/invoice.gateway";
 import {
   GenerateInvoiceUseCaseInputDto,
@@ -29,7 +29,7 @@ export default class GenerateInvoiceUseCase {
 
     const items = input.items.map(
       (item) =>
-        new InvoiceItems({
+        new Product({
           id: new Id(item.id),
           name: item.name,
           price: item.price,
@@ -43,7 +43,7 @@ export default class GenerateInvoiceUseCase {
       items,
     });
 
-    await this._invoiceRepository.add(invoice);
+    await this._invoiceRepository.create(invoice);
 
     return {
       id: invoice.id.id,

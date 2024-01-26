@@ -2,7 +2,7 @@ import GenerateInvoiceUseCase from "./generate-invoice.usecase";
 
 const MockRepository = () => {
   return {
-    add: jest.fn(),
+    create: jest.fn(),
     find: jest.fn(),
   };
 };
@@ -37,7 +37,7 @@ describe("Generate Invoice use case unit test", () => {
 
     const result = await usecase.execute(input);
 
-    expect(repository.add).toHaveBeenCalled();
+    expect(repository.create).toHaveBeenCalled();
     expect(result.id).toBeDefined();
     expect(result.name).toEqual(input.name);
     expect(result.document).toEqual(input.document);
